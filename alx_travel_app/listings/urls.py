@@ -1,5 +1,5 @@
 from rest_framework.routers import DefaultRouter
-from .views import ListingViewSet, BookingViewSet
+from .views import ListingViewSet, BookingViewSet, initiatePaymentView
 
 router = DefaultRouter()
 router.register(r'listings', ListingViewSet, basename='listing')

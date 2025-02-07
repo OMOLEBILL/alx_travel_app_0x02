@@ -27,3 +27,20 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review for {self.listing.title} by {self.user_name}"
+
+class TransactionStatus(models.TextChoices):
+    PENDING = "PENDING", "Pending"
+    SUCCESS = "SUCCESS", "Success"
+    FAILED = "FAILED", "Failed"
+
+class Payment(models.Model):
+    transaction_reference = models.CharField(max_length=255, unique=True)
+    phone_number = models.CharField(max_length=15)
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="payments")
+    user_name = models.CharField(max_length=255)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    date = models.DateField(auto_now_add=True)
+    status = models.CharField(max_length=50, choices=TransactionStatus.choices, default=TransactionStatus.PENDING)
+
+    def __str__(self):
+        return f"Payment for {self.listing.title} by {self.user_name} status {self.status}"

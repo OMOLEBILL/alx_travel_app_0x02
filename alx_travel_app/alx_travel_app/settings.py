@@ -88,10 +88,10 @@ WSGI_APPLICATION = "alx_travel_app.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "travel",
-        "USER": "travel",
-        "PASSWORD": "travelling@2025",
-        "HOST": "localhost",
+        "NAME": env('DB_NAME'),
+        "USER": env('DB_USER'),
+        "PASSWORD": env('DB_PASS'),
+        "HOST": env('DB_HOST'),
         "PORT": "3306",
     }
 }
@@ -140,3 +140,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 }
+
+# Chapa Keys
+CHAPA_PUBLIC = env('CHAPA_PUBLIC')
+CHAPA_PRIVATE = env('CHAPA_PRIVATE')
